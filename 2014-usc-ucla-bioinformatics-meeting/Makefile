@@ -1,6 +1,6 @@
-SRC = demo.tex
-PDF = demo.pdf
-AUX = demo.aux
+SRC = biojs_hgv_talk.tex
+PDF = biojs_hgv_talk.pdf
+AUX = biojs_hgv_talk.aux
 TEXC := xelatex
 TEXC_OPTS += -shell-escape
 
