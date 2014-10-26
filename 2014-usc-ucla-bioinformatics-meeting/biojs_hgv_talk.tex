@@ -5,85 +5,121 @@
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
 \usepackage{minted}
-
+\usetikzlibrary{calc, arrows}
+\usepackage{xstring}
+\usepackage{amsmath}
+%\usepackage[chromatogram,domains]{pgfmolbio}
+\usetikzlibrary{decorations.fractals}
 \usepgfplotslibrary{dateplot}
 
 \usemintedstyle{trac}
 
-\title{A modern beamer theme}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{cloud} = [draw, ellipse, node distance=4cm,    minimum height=2em]
+\tikzstyle{cloudgreen} = [draw, ellipse, fill=green!20, node distance=4cm,    minimum height=2em]
+\tikzstyle{blockred} = [rectangle, draw, fill=red!20, 
+text width=5em, text centered, rounded corners, minimum height=4em, minimum width= 6em]
+\tikzstyle{block} = [rectangle, draw, fill=white!20, 
+text width=5em, text centered, rounded corners, minimum height=4em,minimum width= 6em]
+\tikzstyle{blockgreen} = [rectangle, draw, fill=green!20, 
+text width=5em, text centered, rounded corners, minimum height=4em, minimum width= 6em]
+\tikzstyle{line} = [draw, -latex']
+
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+	\renewcommand{\>}{\end{column}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\NodeSize}{0.5cm}%
+\newcommand*{\YShiftBetweenRows}{-1cm}% Subsequent rows are shited down so they don't overlap
+\tikzset{DNA Style/.style={minimum size=0.5cm, draw=gray, line width=1pt}}{}
+
+\newlength{\YShift}% 
+\newcounter{ColumnCounter}% Prefix for node labels
+
+% Initialize - These are probably not needed, but prefer to set them
+\setlength{\YShift}{0cm}% 
+\setcounter{ColumnCounter}{0}
+\newcommand*{\DNASequence}[2][Mark]{%
+	% http://tex.stackexchange.com/questions/12091/tikz-foreach-loop-with-macro-defined-list
+	\def\Sequence{#2}
+	\foreach [count=\xi] \Label/\Color in \Sequence {%
+		\pgfmathsetmacro{\XShift}{\NodeSize*\xi}%
+		\IfStrEq{\Color}{}{\def\Color{white}}{}
+		\edef\NodeName{#1-\arabic{ColumnCounter}}
+		\node [DNA Style, fill=\Color, xshift=\XShift] (\NodeName) {\Label};
+		\stepcounter{ColumnCounter}
+	} 
+}%
+
+
+
+
+\newcommand*{\ThreeDNASequences}[4][Mark]{% #1 = tikzmark prefix
+	\setcounter{ColumnCounter}{0}% reset column counter
+	\begin{scope}[yshift=\YShift]
+		\DNASequence[#1]{#2} 
+		\pgfmathsetmacro{\Shift}{6cm}% Should compute this based on num of items in #1
+		\begin{scope}[xshift=\Shift]
+			\DNASequence[#1]{#3} 
+		\end{scope}
+		\pgfmathsetmacro{\Shift}{8cm}% Should compute this based on num of items in #2  
+		\begin{scope}[xshift=\Shift]
+			\DNASequence[#1]{#4} 
+		\end{scope}
+	\end{scope}
+	\pgfmathsetlength{\YShift}{\YShift\YShiftBetweenRows}%
+}
+
+
+\title{Human Genetic Variation Viewer}
 \subtitle{}
-\date{\today}
-\author{Matthias Vogelgesang}
-\institute{Institute or miscellaneous information}
+\date{\today \\
+	\\
+	\begin{tikzpicture}
+	%\draw[DeepSkyBlue4] decorate{ decorate{ decorate{ (0,0) -- (3,0) }}}; 
+	%\pmbchromatogram{SampleScf.scf}
+	\DNASequence[Top]{C/blue!20,G/yellow!20,C/blue!20, A/red!30,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
+	
+	
+	
+	%        {C/blue!20, G/blue!20}
+	%       {A/cyan!30, G/cyan!30, C/cyan!30};
+	
+	\end{tikzpicture}
+	\\  
+	\begin{tikzpicture}
+	\hspace*{2pt}\DNASequence[Bottom]{C/blue!20,G/yellow!20,C/blue!20,G/yellow!20,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
+	\end{tikzpicture}
+	\\}
+\author{Saket Choudhary, Leyla Garcia, Andrew Nightingale}
+\institute{University of Southern California, EMBI-EBI}
 
 \begin{document}
 
 \maketitle
 
-\begin{frame}[fragile]
-  \frametitle{mtheme}
 
-  The \emph{mtheme} is a Beamer theme with minimal visual noise inspired by the
-  \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
-  Theme} by Benjamin Weiss.
 
-  Enable the theme by loading
-
-  \begin{minted}[fontsize=\small]{latex}
-    \documentclass{beamer}
-    \usetheme{m}
-  \end{minted}
-
-  Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX
-  installed to enjoy this wonderful typography.
-\end{frame}
-
+\section{Introduction}
 \begin{frame}[fragile]
   \frametitle{Sections}
   Sections group slides of the same topic
 
-  \begin{minted}[fontsize=\small]{latex}
-    \section{Elements}
-  \end{minted}
-
-  for which the \emph{mtheme} provides a nice progress indicator \ldots
+ 
 \end{frame}
 
-\section{Elements}
+
 
 \begin{frame}[fragile]
-  \frametitle{Typography}
-      \begin{minted}[fontsize=\small]{latex}
-The theme provides sensible defaults to \emph{emphasize}
-text, \alert{accent} parts or show \textbf{bold} results.
-      \end{minted}
+  \frametitle{Bioinformatics is broken not broke!}
+     
 
-  \begin{center}becomes\end{center}
+\end{frame}
 
-  The theme provides sensible defaults to \emph{emphasize} text,
-  \alert{accent} parts or show \textbf{bold} results.
-\end{frame}
-\begin{frame}{Lists}
-  \begin{columns}[onlytextwidth]
-    \column{0.5\textwidth}
-      Items
-      \begin{itemize}
-        \item Milk \item Eggs \item Potatos
-      \end{itemize}
 
-    \column{0.5\textwidth}
-      Enumerations
-      \begin{enumerate}
-        \item First, \item Second and \item Last.
-      \end{enumerate}
-  \end{columns}
-\end{frame}
-\begin{frame}{Descriptions}
-  \begin{description}
-    \item[PowerPoint] Meeh.
-    \item[Beamer] Yeeeha.
-  \end{description}
-\end{frame}
 \begin{frame}{Animation}
   \begin{itemize}[<+- | alert@+>]
     \item \alert<4>{This is\only<4>{ really} important}
@@ -91,6 +127,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \item And now this
   \end{itemize}
 \end{frame}
+
 \begin{frame}{Figures}
   \begin{figure}
     \newcounter{density}
