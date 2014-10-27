@@ -76,8 +76,9 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 
 \title{Human Genetic Variation Viewer}
 \subtitle{}
-\date{\today \\
-	\\
+\date{
+\begin{center}
+\today \\
 	\begin{tikzpicture}
 	%\draw[DeepSkyBlue4] decorate{ decorate{ decorate{ (0,0) -- (3,0) }}}; 
 	%\pmbchromatogram{SampleScf.scf}
@@ -89,11 +90,11 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 	%       {A/cyan!30, G/cyan!30, C/cyan!30};
 	
 	\end{tikzpicture}
-	\\  
 	\begin{tikzpicture}
 	\hspace*{2pt}\DNASequence[Bottom]{C/blue!20,G/yellow!20,C/blue!20,G/yellow!20,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
 	\end{tikzpicture}
-	\\}
+    \end{center}
+	}
 \author{Saket Choudhary, Leyla Garcia, Andrew Nightingale}
 \institute{University of Southern California, EMBI-EBI}
 
