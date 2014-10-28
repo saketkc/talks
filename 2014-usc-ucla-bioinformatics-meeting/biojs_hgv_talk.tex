@@ -75,26 +75,18 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 
 
 \title{Human Genetic Variation Viewer}
-\subtitle{}
+%\subtitle{}
 \date{
-\begin{center}
-\today \\
-	\begin{tikzpicture}
-	%\draw[DeepSkyBlue4] decorate{ decorate{ decorate{ (0,0) -- (3,0) }}}; 
-	%\pmbchromatogram{SampleScf.scf}
-	\DNASequence[Top]{C/blue!20,G/yellow!20,C/blue!20, A/red!30,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
-	
-	
-	
-	%        {C/blue!20, G/blue!20}
-	%       {A/cyan!30, G/cyan!30, C/cyan!30};
-	
-	\end{tikzpicture}
-	\begin{tikzpicture}
-	\hspace*{2pt}\DNASequence[Bottom]{C/blue!20,G/yellow!20,C/blue!20,G/yellow!20,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
-	\end{tikzpicture}
+    \begin{center}
+        \today \\
+        \begin{tikzpicture}
+        \DNASequence[Top]{C/blue!20,G/yellow!20,C/blue!20, A/red!30,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
+        \end{tikzpicture}
+        \begin{tikzpicture}
+        \hspace*{2pt}\DNASequence[Bottom]{C/blue!20,G/yellow!20,C/blue!20,G/yellow!20,T/blue!10,C/blue!20, G/yellow!20,A/red!30, G/yellow!20,C/cyan!30,T/blue!10}; 
+        \end{tikzpicture}
     \end{center}
-	}
+}
 \author{Saket Choudhary, Leyla Garcia, Andrew Nightingale}
 \institute{University of Southern California, EMBI-EBI}
 
@@ -106,18 +98,19 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 
 \section{Introduction}
 \begin{frame}[fragile]
-  \frametitle{Sections}
-  Sections group slides of the same topic
-
- 
+  \frametitle{Introduction}
+    \begin{quote}
+        The power of the unaided mind is highly overrated. The real
+        powers come from devising external aids that enhance
+        cognitive abilities. 
+        -- Donald Norman
+    \end{quote}
 \end{frame}
 
 
 
 \begin{frame}[fragile]
   \frametitle{Bioinformatics is broken not broke!}
-     
-
 \end{frame}
 
 
@@ -129,116 +122,11 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Figures}
-  \begin{figure}
-    \newcounter{density}
-    \setcounter{density}{20}
-    \begin{tikzpicture}
-      \def\couleur{mLightBrown}
-      \path[coordinate] (0,0)  coordinate(A)
-                  ++( 90:5cm) coordinate(B)
-                  ++(0:5cm) coordinate(C)
-                  ++(-90:5cm) coordinate(D);
-      \draw[fill=\couleur!\thedensity] (A) -- (B) -- (C) --(D) -- cycle;
-      \foreach \x in {1,...,40}{%
-          \pgfmathsetcounter{density}{\thedensity+20}
-          \setcounter{density}{\thedensity}
-          \path[coordinate] coordinate(X) at (A){};
-          \path[coordinate] (A) -- (B) coordinate[pos=.10](A)
-                              -- (C) coordinate[pos=.10](B)
-                              -- (D) coordinate[pos=.10](C)
-                              -- (X) coordinate[pos=.10](D);
-          \draw[fill=\couleur!\thedensity] (A)--(B)--(C)-- (D) -- cycle;
-      }
-    \end{tikzpicture}
-    \caption{Rotated square from
-    \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
-  \end{figure}
-\end{frame}
-\begin{frame}{Tables}
-  \begin{table}
-    \caption{Largest cities in the world (source: Wikipedia)}
-    \begin{tabular}{lr}
-      \toprule
-      City & Population\\
-      \midrule
-      Mexico City & 20,116,842\\
-      Shanghai & 19,210,000\\
-      Peking & 15,796,450\\
-      Istanbul & 14,160,467\\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-\end{frame}
-\begin{frame}{Blocks}
-
-  \begin{block}{This is a block title}
-    This is soothing.
-  \end{block}
-
-\end{frame}
-\begin{frame}{Math}
-  \begin{equation*}
-    e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
-  \end{equation*}
-\end{frame}
-\begin{frame}{Line plots}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mlineplot,
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-        \addplot {sin(deg(x))};
-        \addplot+[samples=100] {sin(deg(2*x))};
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Bar charts}
-  \begin{figure}
-    \begin{tikzpicture}
-      \begin{axis}[
-        mbarplot,
-        xlabel={Foo},
-        ylabel={Bar},
-        width=0.9\textwidth,
-        height=6cm,
-      ]
-
-      \addplot plot coordinates {(1, 20) (2, 25) (3, 22.4) (4, 12.4)};
-      \addplot plot coordinates {(1, 18) (2, 24) (3, 23.5) (4, 13.2)};
-      \addplot plot coordinates {(1, 10) (2, 19) (3, 25) (4, 15.2)};
-
-      \legend{lorem, ipsum, dolor}
-
-      \end{axis}
-    \end{tikzpicture}
-  \end{figure}
-\end{frame}
-\begin{frame}{Quotes}
-  \begin{quote}
-    Veni, Vidi, Vici
-  \end{quote}
-\end{frame}
-
 
 \section{Conclusion}
 
 \begin{frame}{Summary}
 
-  Get the source of this theme and the demo presentation from
-
-  \begin{center}\url{github.com/matze/mtheme}\end{center}
-
-  The theme \emph{itself} is licensed under a
-  \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
-  Attribution-ShareAlike 4.0 International License}.
-
-  \begin{center}\ccbysa\end{center}
 
 \end{frame}
 
