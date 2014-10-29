@@ -91,10 +91,22 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 \maketitle
 
 
-
-\section{Introduction}
 \begin{frame}[fragile]
-  \frametitle{Introduction}
+\frametitle{Outline}
+\begin{itemize}
+\item Motivation
+\item Solution
+\item BioJS and re-usability
+\item Demo and Use-Cases
+\item Improvements
+\end{itemize}
+\end{frame}
+
+\section{Motivation}
+
+
+\begin{frame}[fragile]
+  \frametitle{Visualizations are powerful!}
     \begin{quote}
         The power of the unaided mind is highly overrated. The real
         powers come from devising external aids that enhance
@@ -105,18 +117,30 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 
 
 
+
+
 \begin{frame}[fragile]
-  \frametitle{Bioinformatics is broken not broke!}
+  \frametitle{Too many SNPs, too many 'drivers'}
+  \begin{itemize}[<+- | alert@+>]
+	  \item NGS had given rise to catalog of genetic variants: dbSNP, COSMIC...
+	  \item More relevant information(prediction): Benign, Damaging, Intermediate
+	  \item Lots of mutations $\implies$ Loads of \emph{differing} predictions
+	  
+  \end{itemize}
+  
+  An exploratory visualization is the first step towards discovering patterns. 
 \end{frame}
 
 
-\begin{frame}{Animation}
+\begin{frame}[fragile]
+\frametitle{Solution}
   \begin{itemize}[<+- | alert@+>]
-    \item \alert<4>{This is\only<4>{ really} important}
-    \item Now this
-    \item And now this
+    %\item \alert<4>{This is\only<4>{ really} important}
+    \item Pool data, visualize, discover
+    \item 
   \end{itemize}
 \end{frame}
+
 
 
 \section{Conclusion}
