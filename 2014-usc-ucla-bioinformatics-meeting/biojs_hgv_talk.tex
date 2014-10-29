@@ -5,16 +5,14 @@
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
 \usepackage{minted}
+\usepackage{tikz}
 \usetikzlibrary{calc, arrows}
 \usepackage{xstring}
 \usepackage{amsmath}
-%\usepackage[chromatogram,domains]{pgfmolbio}
-\usetikzlibrary{decorations.fractals}
 \usepgfplotslibrary{dateplot}
-
 \usemintedstyle{trac}
 
-\usepackage{tikz}
+
 \usetikzlibrary{shapes,arrows}
 \tikzstyle{cloud} = [draw, ellipse, node distance=4cm,    minimum height=2em]
 \tikzstyle{cloudgreen} = [draw, ellipse, fill=green!20, node distance=4cm,    minimum height=2em]
@@ -53,10 +51,6 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 		\stepcounter{ColumnCounter}
 	} 
 }%
-
-
-
-
 \newcommand*{\ThreeDNASequences}[4][Mark]{% #1 = tikzmark prefix
 	\setcounter{ColumnCounter}{0}% reset column counter
 	\begin{scope}[yshift=\YShift]
@@ -73,10 +67,14 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 	\pgfmathsetlength{\YShift}{\YShift\YShiftBetweenRows}%
 }
 
-
 \title{Human Genetic Variation Viewer}
 %\subtitle{}
-\date{
+
+\vspace*{20pt}
+\author[skc]{Saket Choudhary \inst{1}, Leyla Garcia\inst{2} and Andrew Nightingale\inst{2}}
+\institute{\inst{1} University of Southern California and \inst{2} EMBI-EBI}
+
+\date{\vspace*{50pt}
     \begin{center}
         \today \\
         \begin{tikzpicture}
@@ -87,8 +85,6 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
         \end{tikzpicture}
     \end{center}
 }
-\author{Saket Choudhary, Leyla Garcia, Andrew Nightingale}
-\institute{University of Southern California, EMBI-EBI}
 
 \begin{document}
 
