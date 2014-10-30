@@ -22,4 +22,7 @@ _site/
 *.mtc
 *.mtc1
 *.out
+*.snm
+*.nav
+*.vrb
 *.synctex.gz
