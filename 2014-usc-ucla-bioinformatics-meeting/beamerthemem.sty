@@ -42,7 +42,7 @@
     \vfill
     \ifx\inserttitle\@empty%
     \else%
-    {\raggedright\linespread{0.8}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeLowercase{\inserttitle}\par}%
+    {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeLowercase{\inserttitle}\par}%
     \vspace*{0.5em}
     \fi%
     \ifx\insertsubtitle\@empty%
@@ -51,7 +51,7 @@
     \vspace*{0.5em}
     \fi%
     \begin{tikzpicture}\draw[mLightBrown] (0, 0) -- (\textwidth, 0);\end{tikzpicture}%
-    \vspace*{0.5em}
+    \vspace*{1em}
     \ifx\insertauthor\@empty%
     \else%
     {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
@@ -84,7 +84,7 @@
 \newdimen\progressbar@tmpdim    % auxiliary dimension
 
 \progressbar@pbwd=20em
-\progressbar@pbht=1.5pt
+\progressbar@pbht=0.5pt
 
 % the progress bar
 \def\progressbar@sectionprogressbar{%
@@ -177,30 +177,38 @@
 \setbeamertemplate{caption label separator}{: }
 
 %}}}
-%{{{ --- Footline ---------------------
+%{{{ --- Footline/footnote ------------
 
 \usenavigationsymbolstemplate{}
 \setbeamertemplate{footline}
 {%
-\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=1.5ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
-\hfill\usebeamerfont{page number in head/foot}%
-\insertframenumber%
+\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}%
+  \hfill\usebeamerfont{page number in head/foot}%
+  \insertframenumber%
 \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footnote}
+{%
+  \parindent 0em\noindent%
+  \raggedright
+  \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
 }
 
 %}}}
 %{{{ --- Frametitle -------------------
+
 \setbeamertemplate{frametitle}{%
 % \nointerlineskip
 \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.5ex,dp=1.5ex]{frametitle}
   \usebeamerfont{frametitle}\MakeLowercase{\insertframetitle}%
 \end{beamercolorbox}%
-\vspace{-.5em}
 \if@useTitleProgressBar
   \begin{beamercolorbox}[wd=\paperwidth,ht=1pt,dp=0pt]{frametitle}
     \progressbar@titleprogressbar
   \end{beamercolorbox}
 \fi
+\vspace{2em}
 }
 %}}}
 %{{{ --- pgfplots ---------------------
@@ -323,6 +331,7 @@
 % {{{ misc
 \let\otp\titlepage
 \renewcommand{\titlepage}{\otp\addtocounter{framenumber}{-1}}
+\newcommand{\mreducelistspacing}{\vspace{-\topsep}}
 
 \linespread{1.15}
 %}}}
