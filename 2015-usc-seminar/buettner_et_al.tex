@@ -1,0 +1,92 @@
+\documentclass[10pt, compress]{beamer}
+
+\usetheme{m}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{minted}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows}
+\usepackage{xstring}
+\usepackage{amsmath}
+\usepgfplotslibrary{dateplot}
+\usemintedstyle{trac}
+
+
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{cloud} = [draw, ellipse, node distance=4cm,    minimum height=2em]
+\tikzstyle{cloudgreen} = [draw, ellipse, fill=green!20, node distance=4cm,    minimum height=2em]
+\tikzstyle{blockred} = [rectangle, draw, fill=red!20, 
+text width=5em, text centered, rounded corners, minimum height=4em, minimum width= 6em]
+\tikzstyle{block} = [rectangle, draw, fill=white!20, 
+text width=5em, text centered, rounded corners, minimum height=4em,minimum width= 6em]
+\tikzstyle{blockgreen} = [rectangle, draw, fill=green!20, 
+text width=5em, text centered, rounded corners, minimum height=4em, minimum width= 6em]
+\tikzstyle{line} = [draw, -latex']
+
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+	\renewcommand{\>}{\end{column}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\NodeSize}{0.5cm}%
+\newcommand*{\YShiftBetweenRows}{-1cm}% Subsequent rows are shited down so they don't overlap
+\tikzset{DNA Style/.style={minimum size=0.5cm, draw=gray, line width=1pt}}{}
+
+\newlength{\YShift}% 
+\newcounter{ColumnCounter}% Prefix for node labels
+
+% Initialize - These are probably not needed, but prefer to set them
+\setlength{\YShift}{0cm}% 
+\setcounter{ColumnCounter}{0}
+\newcommand*{\DNASequence}[2][Mark]{%
+	% http://tex.stackexchange.com/questions/12091/tikz-foreach-loop-with-macro-defined-list
+	\def\Sequence{#2}
+	\foreach [count=\xi] \Label/\Color in \Sequence {%
+		\pgfmathsetmacro{\XShift}{\NodeSize*\xi}%
+		\IfStrEq{\Color}{}{\def\Color{white}}{}
+		\edef\NodeName{#1-\arabic{ColumnCounter}}
+		\node [DNA Style, fill=\Color, xshift=\XShift] (\NodeName) {\Label};
+		\stepcounter{ColumnCounter}
+	} 
+}%
+\newcommand*{\ThreeDNASequences}[4][Mark]{% #1 = tikzmark prefix
+	\setcounter{ColumnCounter}{0}% reset column counter
+	\begin{scope}[yshift=\YShift]
+		\DNASequence[#1]{#2} 
+		\pgfmathsetmacro{\Shift}{6cm}% Should compute this based on num of items in #1
+		\begin{scope}[xshift=\Shift]
+			\DNASequence[#1]{#3} 
+		\end{scope}
+		\pgfmathsetmacro{\Shift}{8cm}% Should compute this based on num of items in #2  
+		\begin{scope}[xshift=\Shift]
+			\DNASequence[#1]{#4} 
+		\end{scope}
+	\end{scope}
+	\pgfmathsetlength{\YShift}{\YShift\YShiftBetweenRows}%
+}
+
+\title{Computational analysis of cell-to-cell heterogeneity in single-cell RNA-sequencing data reveals hidden subpopulations of cells}
+%\subtitle{}
+
+\vspace*{20pt}
+\author[skc]{Saket Choudhary \inst{1}}
+\institute{\inst{1} University of Southern California and \inst{2} EMBL-EBI}
+
+\date{\vspace*{50pt}
+}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{frame}[fragile]
+\frametitle{Outline}
+\end{frame}
+
+
+
+
+\end{document}
