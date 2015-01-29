@@ -172,8 +172,8 @@ Details later...
 \begin{frame}
 \frametitle{Cell cycle affects can be controlled by fitting a cell-cell covariance matrix}
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/fitting.jpg}
-\caption{Infer the cell-cell covariance matrix using hidden factors such as the cell cycle. this is then used to calculate adjusted
+\includegraphics[width=0.5\linewidth]{images/fitting.jpg}
+\caption{Inferring the cell-cell covariance matrix using hidden factors such as the cell cycle. This is then used to calculate adjusted
 gene expression values for downstream analysis}
 \end{figure}
 \end{frame}
@@ -181,12 +181,12 @@ gene expression values for downstream analysis}
 
 \begin{frame}
 \frametitle{Results in a gist}
-\begin{itemize}
+\begin{itemize}[<+- | alert@+>]
 \item Before applying \textit{scLVM} the cells looked like a variable population
 \item scLVM corrected expression data showed there existed two sub-populations
 \item These two sub-populations were infact found to be associated with T-cell differentiation stages
+\item The method is not about single cell transcriptomics. It is a general approach to isolate, model and understand sources of variability
 \end{itemize}
-The method is not about single cell transcriptomics. It is a general approach to isolate, model and understand sources of variability
 \end{frame}
 
 \begin{frame}
@@ -293,5 +293,16 @@ and hence:
 $y_{corrected} = y_g - y_g^{(hidden)}$
 where $y_g^{(hidden)}$ is the posterior estimation:
 $y_g^{hidden} = \sigma[\sigma +\nu_g]^{-1}(y_g-\mu_g)$
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}[fragile]
+\frametitle{Conclusion}
+\begin{itemize}
+\item Heterogeneity in gene expression in single cells can be compromised by factors such as cell-cycle which are often ignored
+\item scLVM provides a bayesian approach towards filtering out the effect of confounding variables
+\item Counter-intuitively it is easier to cope with \textit{lots} of data that is homogeneous than with limited data that is heterogeneous
+\item Apriori knowledge of confounding factor association can help decompose the variance, possibly raveling underlying undiscovered biology
+\end{itemize}
 \end{frame}
 \end{document}
