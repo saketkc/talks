@@ -68,11 +68,11 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 }
 
 \title{Computational analysis of cell-to-cell heterogeneity in single-cell RNA-sequencing data reveals hidden subpopulations of cells}
-%\subtitle{}
+\subtitle{Buettner et al., (2015) Nature Biotechnology, 1–32. doi:10.1038/nbt.3102}
 
 \vspace*{20pt}
 \author[skc]{Saket Choudhary \inst{1}}
-\institute{\inst{1} University of Southern California and \inst{2} EMBL-EBI}
+\institute{\inst{1} University of Southern California}
 
 \date{\vspace*{50pt}
 }
@@ -94,12 +94,190 @@ text width=5em, text centered, rounded corners, minimum height=4em, minimum widt
 
 \section{Motivation}
 \begin{frame}[fragile]
-\frametitle{Single Cell sequencing is challenging}
+\frametitle{Single Cell sequencing: Challenges}
 \begin{itemize}
 \item Limited amount of sample: Prone to noise and contamination
+\item Profiling hunderds of cells: How to identify subpopulations 
+\item Identify regulatory landscape of each cell population
+\item \textbf{Account for hidden confounding factors that might explain cell heterogeneity}
+\end{itemize}
+\end{frame}
+
+\section{Experiment}
+\begin{frame}[fragile]
+\frametitle{What is it all about?}
+\begin{itemize}
+\item Single cell transcriptomics heterogeneity: many single cells at the same time
+\item Accounting for technical noise was a solved problem; how do you account for \textit{other} sources of variability: cell cycle,
+differentiation state etc.
+\item Given expression levels, how do you infer the effect of \textit{latent} variables
+\end{itemize}
+Key focus: How does cell cycle affect expression levels?
+Given the apriori nature of genes(association with cell-cycle), is it possible to remove the effect of cell cycles?
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Goals}
+Separate out different sources of variation : \textit{technical}, \textit{biological}, \textit{cell cycle}, \textit{other hidden factors}
+with the idea of studying the underlying \textit{interesting} biology. 
+
+Variations such as cell cycle can mask out more physiologically important differences.
+
+Decomposition of this variance by splitting it for different confounding factors can really useful.
+If the original interest is in studying effect of differentiation, it makes sense to factor out the
+effect of cell cycle.
+
+
+Discovering previously unidentified cell types?!
+
+\end{frame}
+
+
+\section{Methods}
+\begin{frame}[fragile]
+\frametitle{Method in a gist}
+\begin{itemize}
+\item Two step approach: Reconstruct state of unobserved factors; Use this information to perform correction over gene 
+expression values
+\item Learn from a pool of well annotated gene sets, those related to cell cycle
+\item Uses bayesian technique to infer effect of latent variables
+\item Fit a \textit{low-rank} covariance matrix to a set of \textbf{predefined} marker genes
+\item Estimate the state of hidden factors using maximum likelihood approach
+\item Decompose the variability of expression levels \textit{across} single cells: expression = mean effect + random effect
+\item Regress out effects of hidden factors
+\item Corrected gene expression level
+
+\end{itemize}
+Details later...
+\end{frame}
+
+\section{Results}
+\begin{frame}
+\frametitle{Cell cycle affects global gene expression}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/expression.jpg}
+\caption{Observed Expression = Effect of differentiation + Effect of state of cell($G1 > S > G2$)}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cell cycle affects can be controlled by fitting a cell-cell covariance matrix}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/fitting.jpg}
+\caption{Infer the cell-cell covariance matrix using hidden factors such as the cell cycle. this is then used to calculate adjusted
+gene expression values for downstream analysis}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Results in a gist}
+\begin{itemize}
+\item Before applying \textit{scLVM} the cells looked like a variable population
+\item scLVM corrected expression data showed there existed two sub-populations
+\item These two sub-populations were infact found to be associated with T-cell differentiation stages
+\end{itemize}
+The method is not about single cell transcriptomics. It is a general approach to isolate, model and understand sources of variability
+\end{frame}
+
+\begin{frame}
+\frametitle{Results in a gist}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/results1.jpg}
+\caption{}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Results in a gist}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{images/variation.jpg}
+\caption{}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Validation}
+\begin{itemize}
+%\item RNA-seq data from an experiment designed to study the differentiation of T cells into $T_H$2 helper cells
+\item Generate single-cel RNA-seq data from mouse embryonic stem cells(mESCs)
+\item The status of cell-cycle of each such cell is known apriori
+\item Perform scLVM fitting of the final expression values using an annotated gene set (from GO/Cellbase) known to be associated
+with cell cycle
+\item The final results are independent of the source of annotation(either GO or CellBase)
+\item The results were consistent even if the size of annotated genes was reduced to 10.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Efficacy: How about just throwing out those known genes?}
+If the genes are known to be associated with cell cycle, why not simple throw them out to rule out the 
+effect of cell cycle?
+
+A non-linear PCA of datasets with cell-cylce associated genes thrown out gave a clear separation, and this separation
+was later validated to be two different cell cycles $=>$ \textit{scLVM} accounts for the latent factors which
+cannot be simply accounted by throwing away those \textit{informative} genes.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Application of scLVM to identify cell populations in differentiating $T_H$2 cells}
+
+\begin{itemize}
+\item scLVM corrected gene expression levels have significantly low between cell correlations: Majority of the varianceis attributable to cell cycle
+\item Significantly corrleated genes post csLVM application were found to be involved in glycolysis and cellular response to IL-4 stimulus(triggers differentiation)
+\item To further validate: non linear PCA with and without scLVM correction. Without correction: no obvious subgroups
+\item One of the two sub-populations post scLVM correction were found to have genes that marked completion of differentiation
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Possibilites and limitations}
+\begin{itemize}
+\item It is possible to account for more than one factor, as long as the corresponding annotated gene sets are available
+\item When multiple confounding factors are considered, in order to ensure robust analysis it is important to ensure
+the statistical significance if the factors are weak or nonindependent
+\item No formal tests exist for testing the presence of a particular factor
+
 \end{itemize}
 \end{frame}
 
 
+\begin{frame}
+\frametitle{The underlying model}
+Let $N$ = Number of cells \\
+$G$ = Number of variable genes(determined using a T-test on pre-processed count data)
+$G_h$ = Set of marker genes(cell-cycle related)
+$Y_h$ = $[y_1, y_2, ... y_h]$ = Vector of gene expressions  where $y_g$ represents gene g's expression acorss cells
 
+\begin{equation}
+Y_h = \mu + CU + XW + \psi
+\end{equation}
+$U,W$ = Weight of linear covariance model where $C$ models $Q$ known covariates and $W$ models unknown covariates.
+
+$\psi$ models the rest of noise
+
+$C,X$ are determined using a bayesian approach assuming both U,W as gaussians prior.
+
+\begin{equation}
+P(Y_h|\sigma_u^2, \nu^2, X, C) = \pi_{g=1}^{G} N(y_g|\mu_g, {\sigma_u^2CC^T+XX^T+\nu^2} )
+\end{equation}
+
+The parameters are then estimated using maximum likelihood approach. Once $XX^T$ is modeled, the genes are modeled
+as sume of mean and random effect:
+
+\begin{equation}
+y_g = \mu + \sum_{h=1}^Hu_h + \psi_e + \psi_t
+\end{equation}
+
+where $P(u_h)=N(\mu_h|0, \sigma_{gh}^2\sigma_h)$, the last two terms accouting for residual and technical noise
+
+and hence:
+
+$y_corrected = y_g - y_g^{(hidden)}$
+where $y_g^{(hidden)}$ is the posterior estimation 
+\end{frame}
 \end{document}
