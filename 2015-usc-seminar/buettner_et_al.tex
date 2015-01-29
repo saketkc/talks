@@ -161,6 +161,7 @@ Details later...
 \end{frame}
 
 \section{Results}
+scLVM: single Cell Latent variable Models
 \begin{frame}
 \frametitle{Cell cycle affects global gene expression}
 \begin{figure}
@@ -179,18 +180,9 @@ gene expression values for downstream analysis}
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Results in a gist}
-\begin{itemize}[<+- | alert@+>]
-\item Before applying \textit{scLVM} the cells looked like a variable population
-\item scLVM corrected expression data showed there existed two sub-populations
-\item These two sub-populations were infact found to be associated with T-cell differentiation stages
-\item The method is not about single cell transcriptomics. It is a general approach to isolate, model and understand sources of variability
-\end{itemize}
-\end{frame}
 
 \begin{frame}
-\frametitle{Results in a gist}
+\frametitle{Validation}
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{images/results1.jpg}
 \caption{a. Gold standard v/s scLVM agreement
@@ -227,21 +219,31 @@ with cell cycle
 If the genes are known to be associated with cell cycle, why not simple throw them out to rule out the 
 effect of cell cycle?
 
-A non-linear PCA of datasets with cell-cylce associated genes thrown out gave a clear separation, and this separation
+A non-linear PCA of datasets with cell-cyclee associated genes thrown out gave a clear separation, and this separation
 was later validated to be two different cell cycles $=>$ \textit{scLVM} accounts for the latent factors which
 cannot be simply accounted by throwing away those \textit{informative} genes.
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Application of scLVM to identify cell populations in differentiating $T_H$2 cells}
-
+\frametitle{Identifying cell populations in differentiating $T_H$2 cells}
+Application: RNA-seq experiment to study differentiation of naive T cells into helper cells
 \begin{itemize}[<+- | alert@+>]
 \item scLVM corrected gene expression levels have significantly low between cell correlations: Majority of the varianceis attributable to cell cycle
-\item Significantly corrleated genes post csLVM application were found to be involved in glycolysis and cellular response to IL-4 stimulus(triggers differentiation)
+\item Significantly corrleated genes post scLVM application were found to be involved in glycolysis and cellular response to IL-4 stimulus(triggers differentiation)
 \item To further validate: non linear PCA with and without scLVM correction. Without correction: no obvious subgroups
 \item One of the two sub-populations post scLVM correction were found to have genes that marked completion of differentiation
 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Results in a gist}
+\begin{itemize}[<+- | alert@+>]
+\item Before applying \textit{scLVM} the cells looked like a variable population
+\item scLVM corrected expression data showed there existed two sub-populations
+\item These two sub-populations were infact found to be associated with T-cell differentiation stages
+\item The method is not about single cell transcriptomics. It is a general approach to isolate, model and understand sources of variability
 \end{itemize}
 \end{frame}
 
@@ -261,7 +263,7 @@ the statistical significance if the factors are weak or nonindependent
 \frametitle{The underlying model}
 Let $N$ = Number of cells \\
 $G$ = Number of variable genes(determined using a T-test on pre-processed count data)
-$G_h$ = Set of marker genes(cell-cycle related)
+$G_h$ = Set of marker genes(cell-cycle related) \\
 $Y_h$ = $[y_1, y_2, ... y_h]$ = Vector of gene expressions  where $y_g$ represents gene g's expression acorss cells
 
 \begin{equation}
@@ -273,12 +275,16 @@ $\psi$ models the rest of noise
 
 $C,X$ are determined using a bayesian approach assuming both U,W as gaussians prior.
 
-\begin{equation}
-P(Y_h|\sigma_u^2, \nu^2, X, C) = \Pi_{g=1}^{G} N(y_g|\mu_g, {\sigma_u^2CC^T+XX^T+\nu^2} )
-\end{equation}
 \end{frame}
 
 \begin{frame}%[allowframebreaks]
+
+\begin{equation}
+P(Y_h|\sigma_u^2, \nu^2, X, C) = \Pi_{g=1}^{G} N(y_g|\mu_g, {\sigma_u^2CC^T+XX^T+\nu^2} )
+\end{equation}
+%\end{frame}
+
+%\begin{frame}%[allowframebreaks]
 The parameters are then estimated using maximum likelihood approach. Once $XX^T$ is modeled, the genes are modeled
 as sume of mean and random effect:
 
