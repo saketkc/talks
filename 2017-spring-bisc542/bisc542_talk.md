@@ -73,12 +73,15 @@ modENCODE: Expressions in tissues are species specific (?!)
 ![img](figures/encode_heatmap.gif)
 
 
+<<<<<<< HEAD
 modENCODE: Experimental Design
 ========================================================
 
 ![img](figures/encode_tissues.gif)
 
 
+=======
+>>>>>>> master
 Correcting for batch-effects restablishes well known fact
 =========================================================
 <div class="incremental"></div>
@@ -90,7 +93,14 @@ Expression is tissue-specific (mostly) and not species-specific
 <div class="incremental"></div>
 
 
+Where the Batch-Effects came from?
+========================================================
 
+<<<<<<< HEAD
+=======
+![img](figures/encode_tissues.gif)
+
+>>>>>>> master
 In-house example: Controls and Knockdown are similar (?!)
 ========================================================
 
