@@ -73,6 +73,12 @@ modENCODE: Expressions in tissues are species specific (?!)
 ![img](figures/encode_heatmap.gif)
 
 
+modENCODE: Experimental Design
+========================================================
+
+![img](figures/encode_tissues.gif)
+
+
 Correcting for batch-effects restablishes well known fact
 =========================================================
 <div class="incremental"></div>
@@ -84,10 +90,6 @@ Expression is tissue-specific (mostly) and not species-specific
 <div class="incremental"></div>
 
 
-Where the Batch-Effects came from?
-========================================================
-
-![img](figures/encode_tissues.gif)
 
 In-house example: Controls and Knockdown are similar (?!)
 ========================================================
@@ -148,7 +150,7 @@ General Idea, given a pool of $J_c$ negative control genes:
 - Assume $k$ given(how?), estimate $\hat{W\alpha} = U\Lambda_kV^T$ retaining only the highest $k$ singular values in $\Lambda_k$ 
 - Substitute $\hat{W}$(=$\hat{W} = U\Lambda$) to estimate $\alpha$, $\beta$
 
-Can be modified to account for replicates/negative controls, by doing the first pass estimation only on replicate or negative controls.
+Can be modified to account for replicates.
 
 SVA -- For any unmodelled factors, not just Batch 
 =========================================================
