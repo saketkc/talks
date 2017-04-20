@@ -85,7 +85,10 @@ Expression is tissue-specific (mostly) and not species-specific
 <div class="incremental"></div>
 
 
+Where the Batch-Effects came from?
+========================================================
 
+![img](figures/encode_tissues.gif)
 
 In-house example: Controls and Knockdown are similar (?!)
 ========================================================
