@@ -115,23 +115,23 @@ In-house example: Correcting batch-effects
 ![img](figures/hur_after_bc.png)
 </center>
 
-========================================================
+================================================================
 Looking for batch effects
-========================================================
+================================================================
 PCA/MDS aren't often sufficient
 
 ![img](figures/pca_gene_batch.png)
 
 
 Looking for batch effects
-========================================================
+================================================================
 RLE plots: Relative Log Expression Median centered $\log$ values
 
 ![img](figures/rle_plots.png)
 
 
 Methods for batch-effects correction
-================
+================================================================
 
 - __R__emove __U__nwanted __V__ariation : **RUV** - Gagnon-Bartsch et. al., Biostatistics (2007); Risso et. al. Nature Biotech (2014)
 - __S__urrogate __V__ariable __A__nalysis : **SVA** - Leek et. al., Plos Genetics (2007); Leek et. al., Bioinformatics (2012)
@@ -139,7 +139,7 @@ Methods for batch-effects correction
 
 
 RUV --  With replicate/negative controls 
-=========================================================
+================================================================
 Assume there are genes that can act as negative controls: difference between exp values arises due to unmodelled factors
 
 For  <span style="color:red">$J$ genes </span> and <span style="color:green">$n$ samples </span> and $k$ unmodelled factors, $p$ known covariates (independent of unmodelled factors):
