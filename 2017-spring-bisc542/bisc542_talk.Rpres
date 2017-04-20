@@ -73,7 +73,6 @@ modENCODE: Expressions in tissues are species specific (?!)
 ![img](figures/encode_heatmap.gif)
 
 
-
 Correcting for batch-effects restablishes well known fact
 =========================================================
 <div class="incremental"></div>
